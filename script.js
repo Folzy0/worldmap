@@ -200,3 +200,39 @@ cities.forEach(city => {
         landmarkMarker.bindPopup(`<b>${landmark.name}</b>`);
     });
 });
+// Обновляем карту с поддержкой отображения информации при наведении
+cities.forEach(city => {
+    // Добавляем маркер города
+    const cityMarker = L.marker(city.coordinates).addTo(map);
+    cityMarker.bindPopup(`<b>${city.name}</b>`);
+
+    // Добавляем событие отображения информации при наведении
+    cityMarker.on('mouseover', function () {
+        this.openPopup();
+    });
+
+    cityMarker.on('mouseout', function () {
+        this.closePopup();
+    });
+
+    // Добавляем маршрут по достопримечательностям
+    const landmarkCoordinates = city.landmarks.map(l => l.coordinates);
+    const polyline = L.polyline(landmarkCoordinates, { color: 'blue' }).addTo(map);
+    polyline.bindPopup(`Маршрут по ${city.name}`);
+
+    // Добавляем маркеры достопримечательностей
+    city.landmarks.forEach(landmark => {
+        const landmarkMarker = L.marker(landmark.coordinates).addTo(map);
+        landmarkMarker.bindPopup(`<b>${landmark.name}</b>`);
+
+        // Добавляем событие для маркеров достопримечательностей
+        landmarkMarker.on('mouseover', function () {
+            this.openPopup();
+        });
+
+        landmarkMarker.on('mouseout', function () {
+            this.closePopup();
+        });
+    });
+});
+
