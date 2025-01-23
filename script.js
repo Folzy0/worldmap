@@ -476,7 +476,7 @@ cities.forEach(city => {
     map.on('zoomend', function () {
         const zoomLevel = map.getZoom();
 
-        if (zoomLevel < 10) {
+        if (zoomLevel < 9) {
             landmarkMarkers.forEach(marker => {
                 if (map.hasLayer(marker)) {
                     map.removeLayer(marker); 
@@ -525,5 +525,22 @@ document.body.addEventListener('click', function (e) {
     const infoBox = document.getElementById('info-box');
     if (infoBox && infoBox.contains(e.target)) {
         e.stopPropagation();
+    }
+});
+// Добавляем города в выпадающий список
+const citySelector = document.getElementById('cities');
+cities.forEach(city => {
+    const option = document.createElement('option');
+    option.value = city.coordinates;
+    option.textContent = city.name;
+    citySelector.appendChild(option);
+});
+
+// Добавляем обработчик события для выбора города
+citySelector.addEventListener('change', (event) => {
+    const selectedCoordinates = event.target.value;
+    if (selectedCoordinates) {
+        const [lat, lng] = selectedCoordinates.split(',').map(coord => parseFloat(coord));
+        map.setView([lat, lng], 14); // Перемещаем камеру к выбранному городу
     }
 });
