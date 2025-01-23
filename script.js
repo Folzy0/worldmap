@@ -197,7 +197,7 @@ const cities = [
     },
     {
         name: 'Иркутск',
-        coordinates: [52.21737615333596, 104.23582902743844],
+        coordinates: [52.274654781558176, 104.28757173989219],
         description: ' город в России, административный центр Иркутской области, образует Городской округ Иркутск. Население города — 606 369 (2024) человек; это шестой по численности населения город Сибири и двадцать пятый по численности населения город России. Расположен в Восточной Сибири, на берегах реки Ангары, при впадении в неё реки Иркут, в 66 км от Байкала. Климат резко континентальный, со значительными перепадами температур. Из-за близости к сейсмически активному Байкальскому рифту регулярны слабые землетрясения. Крупный научно-образовательный центр, в котором обучается свыше ста тысяч студентов. Среди отраслей промышленности: авиастроение, гидроэнергетика и производство продуктов питания. Транспортный узел на Транссибирской железнодорожной магистрали и федеральных автомагистралях «Байкал» и «Сибирь». Старинный сибирский город основан как острог в 1661 году. Сильно пострадал при пожаре 1716 года. Следующий крупный пожар 1879 года вызвал настолько сильные разрушения, что для полного восстановления города потребовалось более 10 лет.',
         landmarks: [
             { name: '130-й квартал', coordinates: [52.28170373130092, 104.29191917121907],
@@ -527,20 +527,46 @@ document.body.addEventListener('click', function (e) {
         e.stopPropagation();
     }
 });
-// Добавляем города в выпадающий список
-const citySelector = document.getElementById('cities');
-cities.forEach(city => {
-    const option = document.createElement('option');
-    option.value = city.coordinates;
-    option.textContent = city.name;
-    citySelector.appendChild(option);
+// Функция для сортировки и обновления списка
+function updateCitySelector(order) {
+    // Сортируем массив городов
+    const sortedCities = [...cities].sort((a, b) => {
+        if (order === 'asc') {
+            return a.name.localeCompare(b.name, 'ru'); // Сортировка от А до Я
+        } else {
+            return b.name.localeCompare(a.name, 'ru'); // Сортировка от Я до А
+        }
+    });
+
+    // Очищаем выпадающий список
+    citySelector.innerHTML = '<option value="">--- Выберите город ---</option>';
+
+    // Заполняем список отсортированными городами
+    sortedCities.forEach(city => {
+        const option = document.createElement('option');
+        option.value = city.coordinates;
+        option.textContent = city.name;
+        citySelector.appendChild(option);
+    });
+}
+
+// Добавляем обработчик события для изменения сортировки
+const sortInputs = document.querySelectorAll('input[name="sort"]');
+sortInputs.forEach(input => {
+    input.addEventListener('change', (event) => {
+        updateCitySelector(event.target.value); // Обновляем список при смене сортировки
+    });
 });
+
+// Инициализация: сортировка по умолчанию (от А до Я)
+const citySelector = document.getElementById('cities');
+updateCitySelector('asc');
 
 // Добавляем обработчик события для выбора города
 citySelector.addEventListener('change', (event) => {
     const selectedCoordinates = event.target.value;
     if (selectedCoordinates) {
         const [lat, lng] = selectedCoordinates.split(',').map(coord => parseFloat(coord));
-        map.setView([lat, lng], 14); // Перемещаем камеру к выбранному городу
+        map.setView([lat, lng], 12); // Перемещаем камеру к выбранному городу
     }
 });
