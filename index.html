@@ -3,19 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Карта России с маршрутами</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- Подключаем Leaflet -->
+    <title>Карта России с туристическими маршрутами</title>
+    <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        #map {
+            height: 100vh;
+        }
+        #city-selector {
+            position: absolute;
+            top: 10px;
+            left: 55px;
+            z-index: 1000;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Карта России с туристическими маршрутами</h1>
-    </header>
-    <main>
-        <div id="map"></div>
-    </main>
+    <div id="city-selector">
+        <label for="cities">Выберите город:</label>
+        <select id="cities">
+            <option value=""> Вся карта </option>
+        </select>
+    </div>
+    <div id="map"></div>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
