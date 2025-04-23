@@ -6,15 +6,18 @@ body, html {
     flex-direction: column;
     height: 100%;
 }
-
-header {
-    background-color: #4CAF50;
-    color: white;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 5vh;
+#title-bar {
+    background-color: #4CAF50; /* Зелёный цвет фона */
+    color: white; /* Белый цвет текста */
+    display: flex; /* Flexbox для центрирования */
+    justify-content: center; /* Горизонтальное центрирование */
+    align-items: center; /* Вертикальное центрирование */
+    height: 60px; /* Высота плашки */
+    font-size: 1.5em; /* Размер шрифта */
+    font-weight: bold; /* Жирный текст */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Лёгкая тень */
+    z-index: 1000; /* Чтобы находилось над другими элементами */
+    position: relative; /* Фиксированное положение */
 }
 
 main {
@@ -24,7 +27,7 @@ main {
 
 #map {
     flex: 1;
-    height: 100%; /* Карта занимает весь доступный экран */
+    height: 100%;
     width: 100%;
 }
 
@@ -34,3 +37,33 @@ footer {
     text-align: center;
     padding: 0.5em 0;
 }
+#about-link {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+#about-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+#about-link i {
+    font-size: 22px;
+    margin-right: 6px;
+}
+#language-selector {
+    position: absolute;
+    top: 11px;
+    right: 55px;
+    z-index: 1000;
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+  }

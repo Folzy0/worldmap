@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Карта России с туристическими маршрутами</title>
+<head> 
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-eH04p9zXWwlhkXjG7jR6RkQnKx3qEfWqBZoN7XxvBzKRY3mN9qsBhgCBh6uUw3lz1kJAZcX23lGOA6IgkC+zlw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         body {
             margin: 0;
@@ -16,7 +14,7 @@
         }
         #city-selector {
             position: absolute;
-            top: 10px;
+            top: 11px;
             left: 55px;
             z-index: 1000;
             background: white;
@@ -28,10 +26,13 @@
 </head>
 <body>
     <div id="city-selector">
-        <label for="cities">Выберите город:</label>
+        <label for="cities">Выбор города:</label>
         <select id="cities">
-            <option value=""> Вся карта </option>
+            <option value="">--- Выберите город ---</option>
         </select>
+        <a href="about.html" id="about-link">
+            <i class="fas fa-info-circle"></i>ℹ️
+        </a>
     </div>
     <div id="map"></div>
     <!-- Leaflet JS -->
